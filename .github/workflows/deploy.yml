@@ -16,9 +16,9 @@ jobs:
           tools: composer:v2
           extensions: gd, zip, xml, mbstring, ctype, fileinfo, json, dom
           coverage: none
-      - run: cd _protected
       - uses: ramsey/composer-install@v3
         with:
           working-directory: "_protected"
           composer-options: "--prefer-dist --no-progress --classmap-authoritative"
+      - run: cd _protected
       - run: php init --env=Production --overwrite=All
