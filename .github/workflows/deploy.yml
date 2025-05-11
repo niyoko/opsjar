@@ -19,5 +19,8 @@ jobs:
       - run: cd _protected
       - uses: ramsey/composer-install@v3
         with:
+          working-directory: "_protected"
           composer-options: "--prefer-dist --no-progress --classmap-authoritative"
       - run: php init --env=Production --overwrite=All
+        with:
+          working-directory: "_protected"
