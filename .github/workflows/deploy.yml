@@ -21,3 +21,8 @@ jobs:
           working-directory: "_protected"
           composer-options: "--prefer-dist --no-progress --classmap-authoritative"
       - run: php _protected/init --env=Production --overwrite=All
+      - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ftp.opsjar.site
+          username: git@opsjar.site
+          password: ${{ secrets.FTP_PASSWORD }}
