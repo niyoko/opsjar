@@ -20,5 +20,4 @@ jobs:
         with:
           working-directory: "_protected"
           composer-options: "--prefer-dist --no-progress --classmap-authoritative"
-      - run: cd _protected
-      - run: php init --env=Production --overwrite=All
+      - run: php _protected/init --env=Production --overwrite=All
