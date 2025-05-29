@@ -42,18 +42,18 @@ $this->registerCssFile("@web/css/jqvmap.css", [
     }
 
     .text-xxs {
-        font-size:xx-small;
+        font-size: xx-small;
     }
 
     .text-xs {
-        font-size:x-small;
+        font-size: x-small;
     }
 
     .table-kasus {
         margin-top: 10px;
 
     }
-    
+
 
     .table-kasus tr td {
         border-bottom: 1px solid white;
@@ -333,7 +333,7 @@ $this->registerCssFile("@web/css/jqvmap.css", [
         color: white;
     }
 
-    .text-md-dashboard{
+    .text-md-dashboard {
         font-size: x-large;
     }
 
@@ -401,7 +401,7 @@ $this->registerCssFile("@web/css/jqvmap.css", [
                                         <div class="box-opsjar-horizontal-wrap">
                                             <div class="d-flex  align-items-center justify-content-center vertical-center" style="max-width:fit-content ;">
                                                 <div class="align-items-center">
-                                                    <div class=" bd-highlight"><?= $this->render('@app/views/utilities/piala-dashboard-'. $nko_color) ?></div>
+                                                    <div class=" bd-highlight"><?= $this->render('@app/views/utilities/piala-dashboard-' . $nko_color) ?></div>
                                                     <div class="text-md p-2 text-warning text-nko" style="vertical-align: middle ;"><span class="font-bold text-md-dashboard <?= $text_nko ?>" style="margin-right:5px"><?= round($nko) ?></span><span class="text-muted">NKO</span></div>
                                                 </div>
                                             </div>
@@ -553,7 +553,7 @@ $this->registerCssFile("@web/css/jqvmap.css", [
                                                 </li>
                                             <?php endforeach ?>
                                             <li>
-                                                <div class="text-sm p-2" style="width: max-content ;">TOTAL <span  class="text-warning"><?= MyFormatter::applyNumberFormat($total) . 'gr' ?></span></div>
+                                                <div class="text-sm p-2" style="width: max-content ;">TOTAL <span class="text-warning"><?= MyFormatter::applyNumberFormat($total) . 'gr' ?></span></div>
                                             </li>
                                         </ul>
                                     </div>
@@ -574,14 +574,14 @@ $this->registerCssFile("@web/css/jqvmap.css", [
                                         <table class="table-kasus" width="90%">
                                             <tr>
                                                 <th>DIPA</th>
-                                                
+
                                             </tr>
                                             <tr>
                                                 <td class="text-warning text-start"><?= $dipa ?  Yii::$app->formatter->asCurrency(round($dipa)) : '-' ?></td>
                                             </tr>
                                             <tr>
-                                                <th >DOKPPN</th>
-                                                
+                                                <th>DOKPPN</th>
+
                                             </tr>
                                             <tr>
                                                 <td class="text-warning text-start"><?= Yii::$app->formatter->asCurrency(round($dokppn)) ?></td>
@@ -658,12 +658,12 @@ $this->registerCssFile("@web/css/jqvmap.css", [
     const mapColor = JSON.parse('{$caseBulan}')
     const selectedReg = '{$provinsi}';
     const tooltipsData =  JSON.parse('{$locations}') ;
-    
+
     let tooltipsDataArray = [];
     for(var i in tooltipsData)
         tooltipsDataArray[i] = tooltipsData[i]
 
-    
+
     let dataJnppArray = [];
     for(var i in dataJnpp)
         dataJnppArray.push(dataJnpp[i]);
@@ -676,7 +676,7 @@ $this->registerCssFile("@web/css/jqvmap.css", [
         label_month.push(dataCase[i].label)
         dataTangkapanArray.push(dataCase[i].tangkapan)
     }
-    
+
     console.log(label_month);
 
 
@@ -695,17 +695,17 @@ $this->registerCssFile("@web/css/jqvmap.css", [
             else{
             $('#keterangan').html("Data Seluruh Indonesia ")
             }
-            
-        
+
+
         });
 
-       
+
 
         $(window).on("resize", sizeMap);
 
     });
 
-   
+
 
     const sizeMap = () => {
         var containerWidth = $('.map-container').width(),
@@ -749,12 +749,12 @@ $this->registerCssFile("@web/css/jqvmap.css", [
                         tmpl+='<div class="tbl-item"><div class="text-sm m-0 p-0">Lainnya </div><div class="m-0 p-0 font-bold">'+d[i].lainnya+'</div></div>';
                         tmpl+='<div class="tbl-item-surat"><div class="text-sm m-0 p-0">Surat Tugas </div><div class="m-0 p-0 font-bold"><a class="text-warning" href="'+d[i].surat_tugas_url+'">'+d[i].surat_tugas+'</a></div></div>';
                         tmpl+='<div class="button-laporan"><a class="btn btn-outline-warning" href="'+d[i].laporan+'">Unduh Dokumen</a></div>';
-                        
+
                         tmpl += '</div>';
                     }
                     if(tmpl != ''){
                         $('#tbl-penangkapan').html(tmpl);
-                        
+
                         if(data.totalPage > 1){
                             pagination = '<ul class="pagination justify-content-left">';
                             start = data.page > 1 ? data.page-1 : 1;
@@ -769,21 +769,21 @@ $this->registerCssFile("@web/css/jqvmap.css", [
                                 pagination += '<li class="page-item '+isActive+'"><a data-id="'+i+'"  class="page-link page-btn" href="#">'+i+'</a></li>';
                             }
                             if(data.page < (data.totalPage-2)){
-                                pagination += '<li class="page-item"><a data-id="'+(data.totalPage)+'" class="page-link" href="#"><span class="material-icons">skip_next</span></a></li>'   
+                                pagination += '<li class="page-item"><a data-id="'+(data.totalPage)+'" class="page-link" href="#"><span class="material-icons">skip_next</span></a></li>'
                             }
-                            
+
                             disabledNext = data.page == data.totalPage ? "disabled" : "";
                             pagination += '<li class="page-item '+disabledNext+'"><a data-id="'+(data.totalPage)+'" class="page-link" href="#"><span class="material-icons text-sm">arrow_forward_ios</span></a></li>'
                             pagination += '</ul>';
                             $('#pagination-modal').html(pagination);
                         }
                     }
-                    
+
                 }
             }
         });
     }
-    
+
     const drawMap = (selectedRegions = null) => {
         sizeMap();
         regionColor = '#c3d3e3';
@@ -814,8 +814,10 @@ $this->registerCssFile("@web/css/jqvmap.css", [
             },
             markers: [[1,2]],
             onRegionClick: function(event, code, region){
-                fillModal(code, '', '', 1)
-                $('#modalDetail').modal('show');
+              console.log(window.regionPath);
+
+                // fillModal(code, '', '', 1)
+                // $('#modalDetail').modal('show');
             },
             onLabelShow: function(event, label,code){
                 var regionName = label[0].innerHTML;
@@ -833,13 +835,13 @@ $this->registerCssFile("@web/css/jqvmap.css", [
 
                 tooltip.push('</table>');
                 label[0].innerHTML = tooltip.join("");
-            },               
-            
+            },
+
         });
         if(!selectedReg){
             jQuery('#vmap').vectorMap('set', 'colors', {...mapColor});
         }
-       
+
     }
 
     $('.btn-close').on('click', function(){
@@ -848,10 +850,10 @@ $this->registerCssFile("@web/css/jqvmap.css", [
         drawMap('$provinsi');
         setTimeout(function(){
             if(!$("#modalDetail").hasClass('show')){
-              
+
                 window.location.reload(1);
             }
-       
+
         }, 30000);
     });
 
@@ -900,12 +902,12 @@ $this->registerCssFile("@web/css/jqvmap.css", [
 
         let progress = document.getElementsByClassName('progress');
         let progressBar = document.getElementsByClassName('progress-bar');
-    
-        
 
-        // setTimeout(function() {            
-        //     moveTotal()            
-        // }, 4500); 
+
+
+        // setTimeout(function() {
+        //     moveTotal()
+        // }, 4500);
 
         // setTimeout(function() {
         //     move(progressBar[0],progressWidth[0].value )
@@ -913,27 +915,27 @@ $this->registerCssFile("@web/css/jqvmap.css", [
         //     move(progressBar[2],progressWidth[2].value )
         //     move(progressBar[3],progressWidth[3].value )
         //     move(progressBar[4],progressWidth[4].value )
-        // }, 3600); 
+        // }, 3600);
 
         // setTimeout(function() {
         //     moveCase($('.text-case-darat'), Number('{$data["darat"]}'))
-        // }, 3000); 
+        // }, 3000);
 
         // setTimeout(function() {
         //     moveCase($('.text-case-laut'), Number('{$data["laut"]}'))
-        // }, 2500); 
+        // }, 2500);
 
         // setTimeout(function() {
         //     moveCase($('.text-case-udara'), Number('{$data["udara"]}'))
-        // }, 2000); 
+        // }, 2000);
 
         // setTimeout(function(){
         //     console.log($("#modalDetail").hasClass('show'));
         //     if(!$("#modalDetail").hasClass('show')){
-              
+
         //         window.location.reload(1);
         //     }
-       
+
         // }, 30000);
 
         function move(elem,maxwidth) {
@@ -986,7 +988,7 @@ $this->registerCssFile("@web/css/jqvmap.css", [
             }
             }
         }
-        
+
         const drawJnpp = () => {
             const bgc = ['#FBB03B','#252733'];
             const data = {
@@ -1009,7 +1011,7 @@ $this->registerCssFile("@web/css/jqvmap.css", [
                     plugins:{
                         legend : {
                             display:false
-                            
+
                         }
                     },
                     animation: {
@@ -1017,7 +1019,7 @@ $this->registerCssFile("@web/css/jqvmap.css", [
                     },
 
                 },
-                
+
             }
 
             const chartJpn = new Chart(document.getElementById('jnpp'), config);
@@ -1071,22 +1073,22 @@ $this->registerCssFile("@web/css/jqvmap.css", [
                     animation: {
                         duration: 3000,
                     },
-                    
-                }            
+
+                }
             }
 
             const chartKasus = new Chart(document.getElementById('kasus'), configKasus);
         }
-    
-    
-    
+
+
+
 JS;
     $this->registerJsFile(
         '@web/js/jquery.vmap.js',
         ['depends' => [\yii\web\JqueryAsset::class]]
     );
     $this->registerJsFile(
-        '@web/js/jquery.vmap.indonesia.js',
+        '@web/js/jquery.vmap.indonesia-2.js',
         ['depends' => [\yii\web\JqueryAsset::class]]
     );
     $this->registerJs($script, \yii\web\View::POS_END);
