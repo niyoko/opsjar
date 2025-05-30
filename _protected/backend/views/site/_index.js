@@ -39,12 +39,10 @@
     const cg = gKanwil
       .group()
       .css("cursor", "pointer")
-      .on("mouseenter", function () {
-        console.log("aaa");
-      })
-      .on("mouseleave", function () {
-        console.log("bb");
-      })
+      .data("toggle", "popover")
+      .data("bs-title", k.shortname)
+      .data("bs-placement", "bottom")
+      .data("bs-content", "contoh <b>Content</b>")
       .on("click", function () {
         console.log(k);
       });
@@ -61,4 +59,12 @@
       .fill("#fff")
       .move(x - 3, y - 3);
   }
+
+  $('[data-toggle="popover"]').each((_idx, el) => {
+    new bootstrap.Popover(el, {
+      container: "body",
+      trigger: "hover",
+      html: true,
+    });
+  });
 })();

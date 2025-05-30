@@ -84,7 +84,7 @@ class SiteController extends Controller
         }
 
         $allOffice = Kantor::find()
-            ->select(['id', 'name', 'id_provinsi', 'coordinate'])
+            ->select(['id', 'name', 'shortname', 'id_provinsi', 'coordinate'])
             ->asArray()
             ->all();
 
