@@ -52,7 +52,19 @@
 
         const svgCont = $("<div />");
         const d = SVG().addTo(svgCont[0]).size(600, 600);
-        d.circle(100).fill("#f00");
+        const g = d.group();
+        for (const p of window.dataProvinsi) {
+          if (!p.path_data) continue;
+          if (p.office_id == k.id) {
+            g.path(p.path_data)
+              .fill(p.background_color)
+              .stroke({ color: "#474f7d", width: 0.5 });
+          }
+        }
+
+        console.log(g.bbox());
+
+        // d.circle(100).fill("#f00");
 
         body.append(svgCont);
 
