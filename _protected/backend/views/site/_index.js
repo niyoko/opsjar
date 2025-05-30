@@ -47,25 +47,32 @@
       .data("bs-content", "contoh <b>Content</b>")
       .on("click", function () {
         $("#modalDetailLabel").text(k.shortname);
-        const body = $("#modalDetail").find(".modal-body");
+        const body = $("#modalDetail").find(".modal-c");
         body.empty();
 
         const svgCont = $("<div />");
         const d = SVG().addTo(svgCont[0]).size(600, 600);
         const g = d.group();
+
+        const el = [];
         for (const p of window.dataProvinsi) {
           if (!p.path_data) continue;
           if (p.office_id == k.id) {
-            g.path(p.path_data)
-              .fill(p.background_color)
-              .stroke({ color: "#474f7d", width: 0.5 });
+            el.push(g.path(p.path_data).fill("#fbfbfe"));
           }
         }
 
-        console.log(g.bbox());
+        const bb = g.bbox();
+        const { x, y, w, h } = bb;
 
-        // d.circle(100).fill("#f00");
+        const wScale = 600 / w;
+        const hScale = 600 / h;
+        const scale = Math.min(wScale, hScale);
+        g.translate(-x, -y);
+        g.scale(scale, x, y);
 
+        for (const e of el) e.stroke({ color: "#474f7d", width: 1 / scale });
+        d.size(scale * w, scale * h);
         body.append(svgCont);
 
         $("#modalDetail").modal("show");
