@@ -30,7 +30,9 @@
 
   for (const p of window.dataProvinsi) {
     if (!p.path_data) continue;
-    g.path(p.path_data).fill(p.background_color).stroke("#474f7d");
+    g.path(p.path_data)
+      .fill(p.background_color)
+      .stroke({ color: "#474f7d", width: 0.5 });
   }
 
   const gKanwil = gMain.group();
@@ -44,7 +46,17 @@
       .data("bs-placement", "bottom")
       .data("bs-content", "contoh <b>Content</b>")
       .on("click", function () {
-        console.log(k);
+        $("#modalDetailLabel").text(k.shortname);
+        const body = $("#modalDetail").find(".modal-body");
+        body.empty();
+
+        const svgCont = $("<div />");
+        const d = SVG().addTo(svgCont[0]).size(600, 600);
+        d.circle(100).fill("#f00");
+
+        body.append(svgCont);
+
+        $("#modalDetail").modal("show");
       });
 
     cg.circle(18)
