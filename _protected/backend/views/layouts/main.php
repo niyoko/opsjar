@@ -16,8 +16,18 @@ AppAsset::register($this);
 BootstrapPluginAsset::register($this);
 $this->registerCssFile('https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css');
 $this->registerCssFile('https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp');
-$this->registerCssFile('https://fonts.googleapis.com/css?family=Noto Sans');
+$this->registerCssFile('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+$this->registerCssFile('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 $this->registerJsFile('https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js');
+$this->registerCss(<<<CSS
+  .material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+  }
+CSS);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -39,7 +49,7 @@ $this->registerJsFile('https://unpkg.com/material-components-web@latest/dist/mat
 
 <body class="d-flex flex-column h-100">
     <?php $this->beginBody() ?>
-    <?php if(!Yii::$app->user->isGuest): ?>
+    <?php if (!Yii::$app->user->isGuest): ?>
         <header>
             <nav class="navbar navbar-expand-md navbar-dark  navbar-dark bg-dark border-bottom border-white">
                 <div class="container-fluid">
@@ -68,7 +78,7 @@ $this->registerJsFile('https://unpkg.com/material-components-web@latest/dist/mat
                                 <a class="nav-link <?= Sidebar::active('capaian') ? 'active' : '' ?>" href="/capaian">Capaian</a>
                             </li>
                             <li class="nav-item">
-                                <a  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout" class="nav-link text-warning <?= Sidebar::active('logout') ? 'active' : '' ?>" href="/site/logout"><span class="material-icons-outlined">
+                                <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout" class="nav-link text-warning <?= Sidebar::active('logout') ? 'active' : '' ?>" href="/site/logout"><span class="material-icons-outlined">
                                         logout
                                     </span></a>
                             </li>

@@ -13,6 +13,7 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'css/tailwind.css',
         'css/select2.min.css',
     ];
     public $js = [
@@ -21,7 +22,6 @@ class AppAsset extends AssetBundle
         'js/utils.js',
         'js/plugin.js',
         'https://cdn.jsdelivr.net/npm/chart.js',
-        'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4',
         'https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.2.4/dist/svg.min.js',
     ];
     public $depends = [

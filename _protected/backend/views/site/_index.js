@@ -44,25 +44,32 @@
       .data("toggle", "popover")
       .data("bs-title", k.shortname)
       .data("bs-placement", "bottom")
-      .data("bs-content", "contoh <b>Content</b>")
+      .data(
+        "bs-content",
+        '<div class="flex"><span class="text-gray-500" style="font-size: 12px;">Anggota Bertugas</span></div>',
+      )
       .on("click", function () {
         $("#modalDetailLabel").text(k.shortname);
         const body = $("#modalDetail").find(".modal-c");
         body.empty();
 
+        const container = $("<div />");
         const svgCont = $("<div />");
         const d = SVG().addTo(svgCont[0]).size(600, 600);
         const g = d.group();
+        const gBorder = g.group();
+        const gOff = g.group();
 
         const el = [];
         for (const p of window.dataProvinsi) {
           if (!p.path_data) continue;
-          if (p.office_id == k.id) {
-            el.push(g.path(p.path_data).fill("#fbfbfe"));
+          const offId = String(p.office_id).split(",");
+          if (offId.includes(String(k.id))) {
+            el.push(gBorder.path(p.path_data).fill("#fbfbfe"));
           }
         }
 
-        const bb = g.bbox();
+        const bb = gBorder.bbox();
         const { x, y, w, h } = bb;
 
         const wScale = 600 / w;
@@ -71,9 +78,28 @@
         g.translate(-x, -y);
         g.scale(scale, x, y);
 
-        for (const e of el) e.stroke({ color: "#474f7d", width: 1 / scale });
+        for (const off of window.allOffice) {
+          if (off.parent_id != k.id && off.id != k.id) continue;
+          if (!off.coordinate) continue;
+          const { x, y } = convertCoordinate(off.coordinate);
+          gOff
+            .circle(10 / scale)
+            .fill("#f00")
+            .move(x - 5 / scale, y - 5 / scale);
+        }
+
+        for (const e of el) e.stroke({ color: "#4A517F", width: 1 / scale });
         d.size(scale * w, scale * h);
-        body.append(svgCont);
+        container.append(svgCont);
+
+        const data = $("<div />");
+        data.append()
+
+
+        container.append(data);
+
+        container.addClass("flex");
+        body.append(container);
 
         $("#modalDetail").modal("show");
       });

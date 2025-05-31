@@ -84,7 +84,7 @@ class SiteController extends Controller
         }
 
         $allOffice = Kantor::find()
-            ->select(['id', 'name', 'shortname', 'id_provinsi', 'coordinate'])
+            ->select(['id', 'name', 'shortname', 'id_provinsi', 'coordinate', 'parent_id'])
             ->asArray()
             ->all();
 
@@ -95,13 +95,18 @@ class SiteController extends Controller
 
         $kanwil = array_values(array_filter($allOffice, function ($off) use ($allProv) {
             $exists = false;
-            foreach ($allProv as $p) $exists |= $p['office_id'] == $off['id'];
+            foreach ($allProv as $p) {
+                foreach (explode(',', $p['office_id']) as $oid) {
+                    $exists |= $oid == $off['id'];
+                }
+            }
             return $exists;
         }));
 
         $dataKanwil = $kanwil;
 
         return $this->render('index', [
+            'allOffice' => $allOffice,
             'dataKanwil' => $dataKanwil,
             'dataProvinsi' => $allProv,
         ]);
