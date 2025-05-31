@@ -12,7 +12,7 @@ class m220830_140409_rename_column_stakeholders extends Migration
      */
     public function safeUp()
     {
-        $this->renameColumn('capaian_kinerja', 'stakekholders_value', 'stakeholders_value');
+        // $this->renameColumn('capaian_kinerja', 'stakekholders_value', 'stakeholders_value');
     }
 
     /**
