@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "office".
@@ -68,5 +69,24 @@ class Kantor extends \yii\db\ActiveRecord
     public function getProvinsi()
     {
         return $this->hasOne(Provinsi::className(), ['id' => 'id_provinsi']);
+    }
+
+    public static function getAllOfices()
+    {
+        $offices = self::find()
+            ->where(['status' => 1]) // Only active offices
+            ->orderBy(['name' => SORT_ASC])
+            ->all();
+
+        return ArrayHelper::map($offices, 'id', 'name');
+    }
+
+    public static function getOfficeIdByName($name)
+    {
+        $office = self::find()
+            ->where(['name' => $name])
+            ->one();
+
+        return $office ? $office->id : null;
     }
 }
