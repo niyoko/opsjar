@@ -23,6 +23,7 @@ class AppAsset extends AssetBundle
         'js/plugin.js',
         'https://cdn.jsdelivr.net/npm/chart.js',
         'https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.2.4/dist/svg.min.js',
+        'https://cdn.jsdelivr.net/npm/@svgdotjs/svg.filter.js@3.0.9',
     ];
     public $depends = [
         'yii\web\YiiAsset',

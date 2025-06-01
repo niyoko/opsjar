@@ -148,37 +148,59 @@
         g.translate(-x, -y);
         g.scale(scale, x, y);
 
+        const shadow = {};
         const dots = {};
+        const rows = {};
 
+        let activeOff = null;
+        let lastActiveOff = null;
         const setActiveOffice = (off) => {
-          if (!off) {
-          } else {
+          activeOff = off;
+          requestAnimationFrame(() => {
+            if (lastActiveOff === activeOff) return;
+            lastActiveOff = activeOff;
             for (const k of Object.keys(dots)) {
-              if (String(k) === String(off)) {
+              if (!activeOff || String(k) === String(activeOff))
                 dots[k].fill("#FBB03B");
+              else dots[k].fill("#DFE3E8");
+            }
+
+            for (const k of Object.keys(shadow)) {
+              if (!activeOff || String(k) === String(activeOff))
+                shadow[k].opacity(0.5);
+              else shadow[k].opacity(0);
+            }
+
+            for (const k of Object.keys(rows)) {
+              if (String(k) === String(activeOff)) {
+                rows[k].css("background-color", "#b3dfff");
               } else {
-                dots[k].fill("#DFE3E8");
+                rows[k].css("background-color", "transparent");
               }
             }
-          }
-          console.log(off);
+          });
         };
 
         for (const off of window.allOffice) {
           if (off.parent_id != k.id && off.id != k.id) continue;
           if (!off.coordinate) continue;
           const { x, y } = convertCoordinate(off.coordinate);
+
+          if (anggotaAtOfficeExists(off.id)) {
+            shadow[off.id] = gOff
+              .circle(16 / scale)
+              .fill("#FF3E3E")
+              .move(x - 8 / scale, y - 8 / scale)
+              .opacity(0.5);
+          }
+
           dots[off.id] = gOff
             .circle(10 / scale)
             .fill("#FBB03B")
             .move(x - 5 / scale, y - 5 / scale)
             .css("cursor", "pointer")
-            .on("mouseenter", () => {
-              setActiveOffice(off.id);
-            })
-            .on("mouseleave", () => {
-              setActiveOffice(null);
-            });
+            .on("mouseenter", () => void setActiveOffice(off.id))
+            .on("mouseleave", () => void setActiveOffice(null));
         }
 
         for (const e of el) e.stroke({ color: "#4A517F", width: 1 / scale });
@@ -233,13 +255,17 @@
           if (String(satker.parent_id) !== String(k.id) && satker.id !== k.id)
             continue;
 
-          penindakanData.append(
-            `<div class="flex flex-row gap-1 px-2 w-full">
-              <div class="border-b-1 border-abu-muda py-1 flex-auto">${satker.shortname}</div>
-              <div class="border-b-1 border-abu-muda py-1 w-[100px] flex-none">4567</div>
-              <div class="border-b-1 border-abu-muda py-1 w-[165px] flex-none">12345</div>
-            </div>`,
-          );
+          const row =
+            $(`<div class="flex flex-row gap-1 px-2 w-full cursor-pointer">
+            <div class="border-b-1 border-abu-muda py-1 flex-auto">${satker.shortname}</div>
+            <div class="border-b-1 border-abu-muda py-1 w-[100px] flex-none">4567</div>
+            <div class="border-b-1 border-abu-muda py-1 w-[165px] flex-none">12345</div>
+          </div>`);
+
+          row.on("mouseenter", () => setActiveOffice(satker.id));
+          row.on("mouseleave", () => setActiveOffice(null));
+          penindakanData.append(row);
+          rows[satker.id] = row;
         }
 
         penindakanCont.append(penindakanData);
