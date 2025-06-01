@@ -144,7 +144,7 @@
                             <li><span class="status-label">Potensi Penghematan Negara</span> &nbsp; <?= $totalHemat ? '<span class="text-success"><i class="fas fa-check-circle"></i></span>'  : '<span id="potensi-hemat" class="status-value">Belum ada data diunggah</span>'  ?> </li>
                             <li><span class="status-label">Jenis NPP</span> &nbsp; <span id="jenis-npp" class="status-value">Belum ada data diunggah</span></li>
                             <li><span class="status-label">Moda Penyelundupan</span> &nbsp; <span id="moda-penyelundupan" class="status-value"><?= $moda ? '<span class="text-success"><i class="fas fa-check-circle"></i></span>'  : '<span id="potensi-hemat" class="status-value">Belum ada data diunggah</span>'  ?></span></li>
-                            <li><span class="status-label">Data Penindakan</span> &nbsp; <span id="data-penindakan" class="status-value">Belum ada data diunggah</span></li>
+                            <li><span class="status-label">Data Penindakan</span> &nbsp; <span id="data-penindakan" class="status-value"><?= $kanwil ? '<span class="text-success"><i class="fas fa-check-circle"></i></span>'  : '<span id="potensi-hemat" class="status-value">Belum ada data diunggah</span>'  ?></span></li>
                         </ul>
                     </div>
                 </div>

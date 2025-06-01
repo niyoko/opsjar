@@ -248,12 +248,14 @@ class ReportController extends Controller
         $totalBerat = AnalyticsTotalNpp::getTotalBerat();
         $totalHemat = AnalyticsPotensiPenyelamatan::getTotalPenghematanTriliunByTahun(date('Y'));
         $moda = AnalyticsModa::getTotalKasusByTahun(date('Y'));
+        $kanwil = AnalyticsKanwil::getTotalKasusByTahun(date('Y'));
         return $this->render('import-analytics', [
             'totalKasus' => $totalKasus,
             'lastUpdated' => Yii::$app->formatter->asDateTime($lastUpdated) ?: 'Belum ada data',
             'totalBerat' => $totalBerat ? Yii::$app->formatter->asDecimal($totalBerat) . ' gr' : 'Belum ada data',
             'totalHemat' => $totalHemat ? Yii::$app->formatter->asDecimal($totalHemat) . ' Triliun' : 'Belum ada data',
             'moda' => $moda ? true : false,
+            'kanwil' => $kanwil ? true : false,
         ]);
     }
 
