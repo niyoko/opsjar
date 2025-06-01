@@ -37,16 +37,38 @@
 
   const gKanwil = gMain.group();
   for (const k of window.dataKanwil) {
+    const anggota = [
+      {
+        photo: null,
+        name: "Budi",
+        office: "KPPBC Tipe Madya Pabean C Sabang",
+      },
+      {
+        photo: null,
+        name: "Anton",
+        office: "KPPBC Tipe Madya Pabean C Meulaboh",
+      },
+    ];
+
+    const anggotaHtml = anggota.map((a) => {
+      return `<div class="flex flex-row gap-1">
+        <div class="w-[95px] flex-none">${a.name}</div>
+        <div class="flex-auto">${a.office}</div>
+      </div>`;
+    });
+
     const { x, y } = convertCoordinate(k.coordinate);
     const cg = gKanwil
       .group()
       .css("cursor", "pointer")
       .data("toggle", "popover")
       .data("bs-title", k.shortname)
-      .data("bs-placement", "bottom")
       .data(
         "bs-content",
-        '<div class="flex"><span class="text-gray-500" style="font-size: 12px;">Anggota Bertugas</span></div>',
+        `<div class="flex flex-column gap-2 w-full">
+          <span class="text-gray-500" style="font-size: 12px;">Anggota Bertugas</span>
+          <div style="flex flex-column gap-2">${anggotaHtml.join("")}</div>
+        </div>`,
       )
       .on("click", function () {
         $("#modalDetailLabel").text(k.shortname);
@@ -93,11 +115,9 @@
         container.append(svgCont);
 
         const data = $("<div />");
-        data.append()
-
+        data.append();
 
         container.append(data);
-
         container.addClass("flex");
         body.append(container);
 

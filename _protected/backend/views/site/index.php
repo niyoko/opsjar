@@ -41,17 +41,17 @@ $cards = [
                     Html::tag("div", implode('', array_map(function ($item) {
                         return Html::tag("div", implode('', [
                             Html::tag("span", implode('', [
-                                Html::tag("span", '', ['class' => 'w-3 h-3 rounded-sm ' . $item[1]]),
+                                Html::tag("span", '', ['class' => 'w-3 h-3 rounded-sm flex-none ' . $item[1]]),
                                 Html::tag("span", $item[0], ['class' => 'font-normal text-[12px]']),
                             ]), [
-                                'class' => 'flex flex-row items-center gap-1'
+                                'class' => 'flex flex-row items-center flex-none w-[100px] break-all gap-1'
                             ]),
                             Html::tag("span", $item[2], ['class' => 'text-[18px]']),
                         ]), [
                             'class' => 'flex flex-row items-center gap-2 justify-between w-full'
                         ]);
                     }, $items)), ['class' => 'flex flex-column gap-1']),
-                ]), ['class' => 'flex flex-row gap-2']);
+                ]), ['class' => 'flex flex-row gap-3']);
             }],
         ],
         [
