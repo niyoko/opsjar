@@ -40,7 +40,7 @@
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
                     // ['label' => 'Beranda', 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
-                    ['label' => 'Beranda', 'icon' => 'fa-solid fa-chart-pie', 'url' => ['/report'], 'active' => Sidebar::active(['report'])],
+                    ['label' => 'Beranda', 'icon' => 'fa-solid fa-chart-pie', 'url' => ['/report/import-analytics'], 'active' => Sidebar::active(['report'])],
                     ['label' => 'Peta Kerawanan', 'url' => ['/provinsi'], 'icon' => 'fa-solid fa-map', 'active' => Sidebar::active(['provinsi'])],
                     ['label' => 'Bimbingan Teknis',  'icon' => 'fa-solid fa-lightbulb', 'url' => ['/bimtek'], 'active' => Sidebar::active(['bimtek'])],
                     ['label' => 'Anggota',  'icon' => 'fa-solid fa-users', 'url' => ['/anggota'], 'active' => Sidebar::active(['anggota'])],
