@@ -12,6 +12,7 @@ use backend\models\Report;
 use backend\models\search\ReportSearch;
 use common\components\Roles;
 use common\models\LoginForm;
+use console\components\Command;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -38,7 +39,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'logout', 'get-detail-provinsi'],
+                        'actions' => ['logout', 'index', 'migrate', 'logout', 'get-detail-provinsi'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -65,6 +66,11 @@ class SiteController extends Controller
             $this->layout = '@app/views/layouts-lte/main.php';
         }
         return parent::beforeAction($action);
+    }
+
+    public function actionMigrate()
+    {
+        return $this->asJson(Command::execute("migrate/up", ['interactive' => false]));
     }
 
     /**
