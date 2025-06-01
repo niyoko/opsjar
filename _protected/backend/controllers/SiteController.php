@@ -93,22 +93,19 @@ class SiteController extends Controller
             ->asArray()
             ->all();
 
-        $kanwil = array_values(array_filter($allOffice, function ($off) use ($allProv) {
-            $exists = false;
-            foreach ($allProv as $p) {
-                foreach (explode(',', $p['office_id']) as $oid) {
-                    $exists |= $oid == $off['id'];
-                }
-            }
-            return $exists;
-        }));
-
-        $dataKanwil = $kanwil;
+        $anggota = Member::find()
+            ->select([
+                'id',
+                'name',
+                'photo',
+                'id_office'
+            ])->asArray()
+            ->all();
 
         return $this->render('index', [
             'allOffice' => $allOffice,
-            'dataKanwil' => $dataKanwil,
             'dataProvinsi' => $allProv,
+            'anggota' => $anggota,
         ]);
     }
 

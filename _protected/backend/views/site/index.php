@@ -142,8 +142,8 @@ JS, View::POS_END);
     </div>
     <div id="main-map" class="mx-auto w-fit"></div>
     <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="Modal Detail" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content modal-lg">
+        <div class="modal-dialog max-w-[1366px]!" role="document">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title font-bold text-dark" id="modalDetailLabel">Provinsi</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -159,5 +159,5 @@ JS, View::POS_END);
 <?php
 $this->registerJs('window.allOffice = ' . json_encode($allOffice) . ';', View::POS_HEAD);
 $this->registerJs('window.dataProvinsi = ' . json_encode($dataProvinsi) . ';', View::POS_HEAD);
-$this->registerJs('window.dataKanwil = ' . json_encode($dataKanwil) . ';', View::POS_HEAD);
+$this->registerJs('window.anggota = ' . json_encode($anggota) . ';', View::POS_HEAD);
 $this->registerJs(file_get_contents(__DIR__ . '/_index.js'), View::POS_END);
