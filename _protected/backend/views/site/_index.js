@@ -148,14 +148,37 @@
         g.translate(-x, -y);
         g.scale(scale, x, y);
 
+        const dots = {};
+
+        const setActiveOffice = (off) => {
+          if (!off) {
+          } else {
+            for (const k of Object.keys(dots)) {
+              if (String(k) === String(off)) {
+                dots[k].fill("#FBB03B");
+              } else {
+                dots[k].fill("#DFE3E8");
+              }
+            }
+          }
+          console.log(off);
+        };
+
         for (const off of window.allOffice) {
           if (off.parent_id != k.id && off.id != k.id) continue;
           if (!off.coordinate) continue;
           const { x, y } = convertCoordinate(off.coordinate);
-          gOff
+          dots[off.id] = gOff
             .circle(10 / scale)
             .fill("#FBB03B")
-            .move(x - 5 / scale, y - 5 / scale);
+            .move(x - 5 / scale, y - 5 / scale)
+            .css("cursor", "pointer")
+            .on("mouseenter", () => {
+              setActiveOffice(off.id);
+            })
+            .on("mouseleave", () => {
+              setActiveOffice(null);
+            });
         }
 
         for (const e of el) e.stroke({ color: "#4A517F", width: 1 / scale });
