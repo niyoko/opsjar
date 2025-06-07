@@ -1,4 +1,4 @@
-<?php 
+<?php
     use common\components\Sidebar;
 ?>
 
@@ -47,8 +47,9 @@
                     ['label' => 'Capaian', 'icon' => 'fa-solid fa-tasks', 'url' => ['/capaian'], 'active' => Sidebar::active(['capaian'])],
                     ['label' => 'Anggaran', 'icon' => 'fa-solid  fa-credit-card','active' => Sidebar::active(['anggaran']), 'url' => ['/anggaran'] ],
                     ['label' => 'Setting', 'icon' => 'fa-solid fa-cog', 'url' => ['/user'], 'active' => Sidebar::active(['user'])],
+                    ['label' => 'Preview Dashboard', 'icon' => 'fa-solid fa-eye', 'url' => ['/site/index'], 'active' => false],
                     ['label' => 'Logout', 'icon' => 'fa-solid fa-arrow-right', 'url' => ['/site/logout']],
-                 
+
                 ],
             ]);
             ?>
@@ -57,4 +58,3 @@
     </div>
     <!-- /.sidebar -->
 </aside>
-

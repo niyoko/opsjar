@@ -4,6 +4,7 @@
 /** @var string $content */
 
 use backend\assets\AppAsset;
+use common\components\Roles;
 use common\components\Sidebar;
 use common\widgets\Alert;
 use yii\bootstrap5\BootstrapPluginAsset;
@@ -57,31 +58,42 @@ CSS);
                     <button class="navbar-toggler ms-auto collapsed" type="button" data-bs-toggle="collapsed" data-bs-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="navbar-collapse collapse" id="navbarCollapse">
+                    <div class="navbar text-white" id="navbarCollapse">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-                                <a class="nav-link <?= Sidebar::active('site') ? 'active' : '' ?>" href="/">Beranda</a>
+                                <a class="nav-link text-white <?= Sidebar::active('site') ? 'active' : '' ?>" href="/">Beranda</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link <?= Sidebar::active('provinsi', ['view']) ? 'active' : '' ?>" href="/provinsi/view">Peta Kerawanan</a>
+                                <a class="nav-link text-white <?= Sidebar::active('provinsi', ['view']) ? 'active' : '' ?>" href="/provinsi/view">Peta Kerawanan</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link <?= Sidebar::active('bimtek') ? 'active' : '' ?>" href="/bimtek">Bimbingan Teknis</a>
+                                <a class="nav-link text-white <?= Sidebar::active('bimtek') ? 'active' : '' ?>" href="/bimtek">Bimbingan Teknis</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link <?= Sidebar::active('anggaran') ? 'active' : '' ?>" href="/anggaran">Anggaran</a>
+                                <a class="nav-link text-white <?= Sidebar::active('anggaran') ? 'active' : '' ?>" href="/anggaran">Anggaran</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link <?= Sidebar::active('anggota') ? 'active' : '' ?>" href="/anggota">Anggota</a>
+                                <a class="nav-link text-white <?= Sidebar::active('anggota') ? 'active' : '' ?>" href="/anggota">Anggota</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link <?= Sidebar::active('capaian') ? 'active' : '' ?>" href="/capaian">Capaian</a>
+                                <a class="nav-link text-white <?= Sidebar::active('capaian') ? 'active' : '' ?>" href="/capaian">Capaian</a>
                             </li>
-                            <li class="nav-item">
-                                <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout" class="nav-link text-warning <?= Sidebar::active('logout') ? 'active' : '' ?>" href="/site/logout"><span class="material-icons-outlined">
-                                        logout
-                                    </span></a>
-                            </li>
+                            <?php if (isset(Yii::$app->user->identity->role) && Yii::$app->user->identity->role == Roles::ROLE_ADMIN) : ?>
+                                <li class="nav-item">
+                                    <a class="nav-link text-warning" href="/report">
+                                        <span class="flex items-center gap-1">
+                                            <span class="material-icons-outlined">arrow_back</span>
+                                            <span>Kembali</span>
+                                        </span>
+                                    </a>
+                                </li>
+                            <?php else : ?>
+                                <li class="nav-item">
+                                    <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout" class="nav-link text-warning <?= Sidebar::active('logout') ? 'active' : '' ?>" href="/site/logout">
+                                        <span class="material-icons-outlined">logout</span>
+                                    </a>
+                                </li>
+                            <?php endif; ?>
                         </ul>
                     </div>
                 </div>

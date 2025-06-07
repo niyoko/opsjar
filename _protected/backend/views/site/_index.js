@@ -1,4 +1,11 @@
 (() => {
+  $("#select-tahun").on("change", () => {
+    const tahun = $("#select-tahun").val();
+    if (!tahun) return;
+
+    window.location.href = `?tahun=${tahun}`;
+  });
+
   const anggotaAtOfficeExists = (officeId) => {
     return window.anggota.some((a) => {
       return String(a.id_office) === String(officeId);

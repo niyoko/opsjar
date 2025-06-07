@@ -8,15 +8,12 @@ use backend\models\CapaianKinerja;
 use backend\models\Kantor;
 use backend\models\Member;
 use backend\models\Provinsi;
-use backend\models\Report;
 use backend\models\search\ReportSearch;
 use common\components\Roles;
 use common\models\LoginForm;
 use console\components\Command;
 use Yii;
-use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -83,11 +80,22 @@ class SiteController extends Controller
         if (Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
-        if (isset(Yii::$app->user->identity->role) && Yii::$app->user->identity->role == Roles::ROLE_ADMIN) {
-            $this->layout = '@app/views/layouts-lte/main.php';
-            return $this->redirect(['/report']);
+        $years = Yii::$app->db->createCommand('
+          SELECT tahun FROM (
+          SELECT tahun FROM analytics_jenis_npp UNION
+          SELECT tahun FROM analytics_kanwil UNION
+          SELECT tahun FROM analytics_moda UNION
+          SELECT tahun FROM analytics_potensi_penyelamatan UNION
+          SELECT tahun FROM analytics_total_npp
+          ) x ORDER BY tahun DESC
+        ')->queryColumn();
+        if (empty($years)) {
+            $years = [date('Y')];
         }
+
+        $selectedYear = isset($_GET['tahun']) ? $_GET['tahun'] : $years[0];
+
+        $this->layout = '@app/views/layouts/main.php';
 
         $allOffice = Kantor::find()
             ->select(['id', 'name', 'shortname', 'id_provinsi', 'coordinate', 'parent_id'])
@@ -108,10 +116,31 @@ class SiteController extends Controller
             ])->asArray()
             ->all();
 
+        $totalNpp = Yii::$app->db->createCommand('
+          SELECT COALESCE(SUM(kasus), 0) kasus, COALESCE(SUM(berat_gr), 0) berat FROM analytics_total_npp WHERE tahun = :tahun
+        ', ['tahun' => $selectedYear])->queryOne();
+
+        $totalPenghematan = Yii::$app->db->createCommand('
+          SELECT COALESCE(SUM(penghematan_rp), 0) rp, COALESCE(SUM(jiwa), 0) jiwa FROM analytics_potensi_penyelamatan WHERE tahun = :tahun
+        ', ['tahun' => $selectedYear])->queryOne();
+
+        $moda = Yii::$app->db->createCommand('
+          SELECT perlintasan, SUM(kasus) kasus, SUM(berat) berat FROM analytics_moda WHERE tahun = :tahun GROUP BY perlintasan
+          ORDER BY SUM(berat) DESC
+        ', ['tahun' => $selectedYear])->queryAll();
+
+
         return $this->render('index', [
             'allOffice' => $allOffice,
             'dataProvinsi' => $allProv,
             'anggota' => $anggota,
+            'years' => $years,
+            'selectedYear' => $selectedYear,
+            'totalKasus' => $totalNpp['kasus'],
+            'totalBerat' => $totalNpp['berat'],
+            'totalPenghematan' => $totalPenghematan['rp'],
+            'totalJiwa' => $totalPenghematan['jiwa'],
+            'moda' => $moda,
         ]);
     }
 

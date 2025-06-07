@@ -14,6 +14,9 @@ return [
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
+        'assetManager' => [
+            'appendTimestamp' => true,
+        ],
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
@@ -41,13 +44,12 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-            ],
+            'rules' => [],
         ],
         'formatter' => [
             'locale' => 'id-ID'
-       ],
-        
+        ],
+
     ],
     'params' => $params,
 ];
