@@ -26,3 +26,8 @@ jobs:
           server: ftp.opsjar.site
           username: git@opsjar.site
           password: ZkW34fMg2fKEbf6cwDDPt7pr
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            _protected/vendor/**
