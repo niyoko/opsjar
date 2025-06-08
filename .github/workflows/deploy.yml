@@ -31,3 +31,6 @@ jobs:
             **/.git*/**
             **/node_modules/**
             _protected/vendor/**
+            _protected/docs/**
+            _protected/environments/**
+            
