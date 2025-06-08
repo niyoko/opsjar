@@ -26,6 +26,7 @@ jobs:
           server: ftp.opsjar.site
           username: git@opsjar.site
           password: ZkW34fMg2fKEbf6cwDDPt7pr
+          timeout: 600000
           exclude: |
             **/.git*
             **/.git*/**
@@ -33,4 +34,3 @@ jobs:
             _protected/vendor/**
             _protected/docs/**
             _protected/environments/**
-            
