@@ -31,6 +31,5 @@ jobs:
             **/.git*
             **/.git*/**
             **/node_modules/**
-            _protected/vendor/**
-            _protected/docs/**
-            _protected/environments/**
+            _protected/common/config/main-local.php
+            _protected/backend/config/main-local.php
