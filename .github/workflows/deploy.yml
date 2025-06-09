@@ -33,3 +33,6 @@ jobs:
             **/node_modules/**
             _protected/common/config/main-local.php
             _protected/backend/config/main-local.php
+            _protected/backend/web/assets/**
+            assets/**
+            deploy.js
